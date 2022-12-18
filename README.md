@@ -5,6 +5,7 @@
 ### Deploy
 
 ```shell
+npm i
 cdk synth --quiet
 cdk deploy
 ```
