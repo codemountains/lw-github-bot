@@ -10,27 +10,27 @@ const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent) => {
 
     const githubEvent = event.headers["X-GitHub-Event"];
     if (githubEvent !== "ping" && githubEvent !== "push") {
-        return  {
+        return {
             statusCode: 400,
         };
     }
 
     // '204 No Content' returned on event when setting up Webhook.
     if (githubEvent === "ping") {
-        return  {
+        return {
             statusCode: 204,
         };
     }
 
     const query = event.queryStringParameters;
     if (query === null) {
-        return  {
+        return {
             statusCode: 400,
         };
     }
     const channelId = query.channelId;
     if (channelId === undefined) {
-        return  {
+        return {
             statusCode: 400,
         };
     }
@@ -39,7 +39,7 @@ const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent) => {
     console.info(requestBody);
 
     if (requestBody === null) {
-        return  {
+        return {
             statusCode: 400,
         };
     }
