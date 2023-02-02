@@ -128,22 +128,27 @@ const sendMessageWithActions = async (
     text: string,
     uri :string,
 ): Promise<void> => {
-    const headers = {
-        Authorization: `Bearer ${accessToken}`
-    }
-
-    const response = await axios.post(`https://www.worksapis.com/v1.0/bots/${botId}/channels/${channelId}/messages`, {
-        content: {
-            type: "button_template",
-            contentText: text,
-            actions: [{
-                type: "uri",
-                label: "Comparing changes",
-                uri: uri
-            }]
+    try {
+        const headers = {
+            Authorization: `Bearer ${accessToken}`
         }
-    }, { headers });
-    console.info(response);
+
+        const url = `https://www.worksapis.com/v1.0/bots/${botId}/channels/${channelId}/messages`;
+        const response = await axios.post(url, {
+            content: {
+                type: "button_template",
+                contentText: text,
+                actions: [{
+                    type: "uri",
+                    label: "Comparing changes",
+                    uri: uri
+                }]
+            }
+        }, { headers });
+        console.info(response);
+    } catch(error) {
+        console.error(error);
+    }
 }
 
 export { handler };
